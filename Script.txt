@@ -1,0 +1,36 @@
+insert into pacientes values('29234333','Alejandra Marcela','Díaz Granados','1980-03-24','F'),('1098343678','Juan Antonio','Pérez Pereira','1978-08-09','M'),('37456298','Diana Marcela','Estévez','1985-09-06','F'),('51890654','Adriana Maria','Pataquiva','1990-12-24','F');
+
+insert into tratamientos (TraFechaAsignado, TraDescripcion, TraFechaInicio, TraFechaFin, TraObservaciones, TraPaciente) values('2017-07-02','Profilaxis','2017-07-02','2017-07-02','Sin Novedad','51890654'),('2017-06-05','Resina','2017-06-05','2017-06-05','Paciente con sensibilidad','37456298'),('2017-05-23','Profilaxis','2017-05-23','2017-05-23','Sin Novedad','29234333');
+
+select * from pacientes where PacApellidos like '%ra%';
+
+select PacNombres as Nombres, PacApellidos as Apellidos, PacSexo as Sexo from Pacientes;
+
+select p.PacNombres, p.PacApellidos, p.PacSexo from Pacientes as p;
+
+select PacNombres as Nombres, PacApellidos as Apellidos from pacientes where PacSexo='F';
+
+select PacNombres as Nombres, PacApellidos as PacApellidos from pacientes where PacSexo='M' and PacApellidos like '%ra%';
+
+select PacNombres as Nombres, PacApellidos as PacApellidos from pacientes where PacSexo='F' or PacApellidos like '%ra%';
+
+Order By
+
+select PacNombres as Nombres,PacApellidos as Apellidos, PacSexo as Sexo from Pacientes
+where PacSexo = 'F' order by PacNombres, PacApellidos;
+
+Join
+
+select PacNombres as Nombres, PacApellidos as Apellidos, TraDescripcion as Descripcion, TraObservaciones as Observaciones from tratamientos join pacientes;
+
+select PacNombres as Nombres, PacApellidos as Apellidos, TraDescripcion as Descripcion, TraObservaciones as Observaciones from tratamientos a join pacientes b on b.PacIdentificacion=a.TraPaciente;
+
+select PacNombres as Nombres, PacApellidos as Apellidos, TraDescripcion as Descripcion, TraObservaciones as Observaciones from tratamientos a join pacientes b on b.PacIdentificacion=a.TraPaciente where b.PacSexo='F';
+
+Subconsultas
+
+select(select a.PacNombres from Pacientes a where a.PacIdentificacion = b.TraPaciente)
+as nombre,(select a.PacApellidos from pacientes a where a.PacIdentificacion=b.TraPaciente)
+as apellidos, b.Tradescripcion, b.Traobservaciones from tratamientos b;
+
+select PacNombres, PacApellidos from Pacientes where PacIdentificacion NOT IN (select TraPaciente from tratamientos);
