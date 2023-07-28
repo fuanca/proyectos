@@ -34,3 +34,5 @@ as nombre,(select a.PacApellidos from pacientes a where a.PacIdentificacion=b.Tr
 as apellidos, b.Tradescripcion, b.Traobservaciones from tratamientos b;
 
 select PacNombres, PacApellidos from Pacientes where PacIdentificacion NOT IN (select TraPaciente from tratamientos);
+
+**// Es otra cambio realizado al documento Original //**
