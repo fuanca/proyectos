@@ -33,4 +33,4 @@ select(select a.PacNombres from Pacientes a where a.PacIdentificacion = b.TraPac
 as nombre,(select a.PacApellidos from pacientes a where a.PacIdentificacion=b.TraPaciente)
 as apellidos, b.Tradescripcion, b.Traobservaciones from tratamientos b;
 
-select PacNombres, PacApellidos from Pacientes where PacIdentificacion NOT IN (select TraPaciente from tratamientos);
+
